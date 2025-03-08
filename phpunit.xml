@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true"
+         cacheResult="false"
+         executionOrder="random">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>src/Infrastructure/Controller</directory>
+            <directory>src/Infrastructure/Persistence/Doctrine/Mapping</directory>
+        </exclude>
+        <report>
+            <html outputDirectory="build/coverage"/>
+            <clover outputFile="build/logs/clover.xml"/>
+            <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+        </report>
+    </coverage>
+    <php>
+        <env name="APP_ENV" value="test"/>
+        <env name="DATABASE_URL" value="sqlite:///:memory:"/>
+    </php>
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
+</phpunit>

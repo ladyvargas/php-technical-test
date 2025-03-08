@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\User\Entity\User" table="users">
+        <id name="id" type="string" column="id">
+            <generator strategy="UUID" />
+        </id>
+
+        <embedded name="name" class="App\Domain\User\ValueObject\Name" use-column-prefix="false" />
+        <embedded name="email" class="App\Domain\User\ValueObject\Email" use-column-prefix="false" />
+        <embedded name="password" class="App\Domain\User\ValueObject\Password" use-column-prefix="false" />
+
+        <field name="createdAt" column="created_at" type="datetime_immutable" />
+    </entity>
+
+    <embeddable name="App\Domain\User\ValueObject\Name">
+        <field name="name" column="name" type="string" length="255" />
+    </embeddable>
+
+    <embeddable name="App\Domain\User\ValueObject\Email">
+        <field name="email" column="email" type="string" length="255" unique="true" />
+    </embeddable>
+
+    <embeddable name="App\Domain\User\ValueObject\Password">
+        <field name="password" column="password" type="string" length="255" />
+    </embeddable>
+
+</doctrine-mapping>
