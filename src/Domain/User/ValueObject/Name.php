@@ -14,7 +14,6 @@ final class Name
         $this->ensureIsValidName($name);
         $this->name = $name;
     }
-
     public static function fromString(string $name): self
     {
         return new self($name);
@@ -36,6 +35,10 @@ final class Name
         if (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
             throw new \InvalidArgumentException('Name contains invalid characters');
         }
+    }
+    public function equals(Name $other): bool
+    {
+        return $this->name === $other->name;
     }
 
     public function __toString(): string

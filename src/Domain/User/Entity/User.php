@@ -11,7 +11,7 @@ use App\Domain\User\ValueObject\Password;
 use App\Domain\User\ValueObject\UserId;
 use DateTimeImmutable;
 
-final class User
+class User
 {
     private UserId $id;
     private Name $name;
@@ -52,6 +52,10 @@ final class User
 
         return $user;
     }
+    public function equals(Name $other): bool
+    {
+        return $this->name === $other->value();
+    }
 
     public function id(): UserId
     {
@@ -73,9 +77,29 @@ final class User
         return $this->password;
     }
 
+    public function verifyPassword(string $plainPassword): bool
+    {
+        return $this->password->verify($plainPassword);
+    }
+
+    public function updateEmail(Email $newEmail): void
+    {
+        $this->email = $newEmail;
+    }
+
     public function createdAt(): DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function updateName(Name $newName): void
+    {
+        $this->name = $newName;
+    }
+
+    public function changePassword(Password $newPassword): void
+    {
+        $this->password = $newPassword;
     }
 
     private function recordEvent(object $event): void

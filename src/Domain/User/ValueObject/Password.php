@@ -9,7 +9,7 @@ use App\Domain\User\Exception\WeakPasswordException;
 final class Password
 {
     private string $hashedPassword;
-
+    const MIN_LENGTH = 8;
     private function __construct(string $hashedPassword)
     {
         $this->hashedPassword = $hashedPassword;
@@ -24,6 +24,17 @@ final class Password
     public static function fromHash(string $hash): self
     {
         return new self($hash);
+    }
+    public static function fromString(string $password): self
+    {
+        // Check if password is strong
+        
+
+        if (strlen($password) < self::MIN_LENGTH) {
+            throw new WeakPasswordException("Password must be at least 8 characters long.");
+        }
+
+        return new self($password);
     }
 
     public function value(): string

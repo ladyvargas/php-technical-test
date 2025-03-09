@@ -6,7 +6,7 @@ namespace App\Application\User\DTO;
 
 use App\Domain\User\Entity\User;
 
-final class UserResponseDTO
+class UserResponseDTO
 {
     private string $id;
     private string $name;
@@ -39,5 +39,26 @@ final class UserResponseDTO
             'email' => $this->email,
             'created_at' => $this->createdAt
         ];
+    }
+
+    // Métodos getter
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\EventDispatcher;
 
-final class EventDispatcher
+class EventDispatcher
 {
     private array $listeners = [];
 
